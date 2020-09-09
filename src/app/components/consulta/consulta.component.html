@@ -1,0 +1,72 @@
+
+<h1>Productos</h1>
+<hr>
+
+<div class="row">
+  <div class="col-6 text-left">
+    <a class="nav-link" class="btn btn-info " [routerLink]="['/producto/nuevo']"><i class="fa fa-plus"> Agregar </i></a>
+  </div>
+
+</div>
+
+
+<div class="table-responsive animated fadeIn faster mt-4 mb-5" *ngIf="!cargando && productos.length >  0">
+<table datatable [dtOptions]="dtOptions" class="row-border hover table">
+  <thead class="thead-dark">
+    <tr class="text-center">
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Carasteristicas</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Correo fabricante</th>
+      <th scope="col">Pais</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Disponible</th>
+      <th scope="col">Vendidas</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let producto of productos;let i =index" class="text-center">
+      <td>{{i+1}}</td>
+      <td>{{producto.nombre}}</td>
+      <td>{{producto.caracteristica}}</td>
+      <td>{{producto.fecha}}</td>
+      <td>{{producto.correo}}</td>
+      <td>{{producto.pais}}</td>
+      <td>{{producto.precio | currency:'COP':'symbol-narrow':'.0-0'}}</td>
+      <td>
+        <label  class="badge badge-success ">{{producto.disponible}}</label>
+      </td>
+      <td>
+        <label  class="badge badge-danger ">{{producto.vendidas}}</label></td>
+
+      <td>
+          <button class="btn btn-info mr-1 mb-1" [routerLink]="['/producto',producto.id]">
+            <i class="fa fa-pen"></i>
+          </button>
+          <button class="btn btn-danger" (click)="eliminarProducto(producto, i)">
+            <i class="fa fa-trash"></i>
+          </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div *ngIf="!cargando && productos.length === 0 " class="alert alert-warning text-center mt-3 animated fadeIn faster">
+  <h4 class="alert-heading">No hay productos registrados</h4>
+  <p>
+    <i class="fa fa-exclamation fa-2x" ></i>
+  </p>
+</div>
+
+<div *ngIf="cargando" class="alert alert-info text-center mt-3 animated fadeIn faster">
+  <h4 class="alert-heading">Cargando</h4>
+  <p>
+    <i class="fa fa-sync-alt fa-spin fa-2x" ></i>
+  </p>
+  <p class="mb-0">
+    Espere por favor..
+  </p>
+</div>

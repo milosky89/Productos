@@ -1,0 +1,80 @@
+
+<form [formGroup]="formulario" class="animated fadeIn faster">
+  <h1>Registro de productos</h1>
+  <hr />
+  <div class="form-row">
+
+    <div class="form-group col-md-6">
+      <label>Nombre del producto</label>
+      <input type="text" class="form-control" formControlName="nompreProducto" [(ngModel)]="producto.nombre"
+        name="nombre" [class.is-invalid]="nombreNovalido">
+    </div>
+    <div class="form-group col-md-6">
+      <label>Fecha de lanzamiento</label>
+      <input type="date" class="form-control" formControlName="fechaLanzamiento" name="fecha"
+        [(ngModel)]="producto.fecha" [class.is-invalid]="fechaNovalido">
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Caracteristicas del producto</label>
+    <textarea type="text" class="form-control" formControlName="caracteristica" name="caracteristica"
+      [(ngModel)]="producto.caracteristica" [class.is-invalid]="caracteristicaNovalido"></textarea>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Correo fabricante</label>
+      <input type="text" class="form-control" formControlName="correofabricante" name="correo"
+        [(ngModel)]="producto.correo" [class.is-invalid]="correoNovalido">
+    </div>
+    <div class="form-group col-md-6">
+      <label>Pais fabricación</label>
+      <select type="text" class="form-control" formControlName="paisFabricacion" [class.is-invalid]="paisesNovalido"
+        [(ngModel)]="producto.pais" name="pais">
+        <option *ngFor="let pais of paises" [value]="pais.nombre">{{pais.nombre}}</option>
+
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label>Precio</label>
+      <input type="number" class="form-control" formControlName="precio" name="precio" [(ngModel)]="producto.precio"
+        [class.is-invalid]="precioNovalido">
+    </div>
+    <div class="form-group col-md-4">
+      <label>Unidades disponibles</label>
+      <input type="number" class="form-control" formControlName="disponibles" name="disponible"
+        [(ngModel)]="producto.disponible" [class.is-invalid]="disponiblesNovalido">
+    </div>
+    <div class="form-group col-md-4">
+      <label>Unidades vendidas</label>
+      <input type="number" class="form-control" formControlName="vendidas" name="vendidas"
+        [(ngModel)]="producto.vendidas" [class.is-invalid]="vendidasNovalido">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <h5>Seleccionar imagen</h5>
+    <input type="file" accept=".png, .jpg" (change)="onUpload($event)" formControlName="imagen" [(ngModel)]="producto.imagen" name="imagen">
+  </div>
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped bg-success"
+      role="progressbar" [style.width]="(uploadPercent | async) +'%'">
+
+    </div>
+  </div>
+  <input   #imageProducto  type="hidden" [value]="urlImage | async">
+  <hr>
+  <div class="row">
+    <div class="col ">
+      <a type="subtmit" class="nav-link" class="btn btn-info mr-2 " (click)='Guardar()'><i class="fa fa-save"> Guardar
+        </i></a>
+      <a class="nav-link" class="btn btn-danger " [routerLink]="['/productos']"><i class="fa fa-arrow-right"> Volver
+        </i></a>
+    </div>
+  </div>
+
+</form>
+

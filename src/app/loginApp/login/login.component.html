@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-2">
+      <br>
+      <br>
+      <br>
+      <h2 class="text-center">Bienvenidos a Productos App</h2>
+      <br>
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div class="row">
+          <div class="col-4">
+            <img class="img-fluid" src="../../../assets/img/logo.jpg" alt="">
+          </div>
+          <div class="col-8">
+            <br>
+            <span *ngIf="f.submitted && f.controls['email'].errors" class="text-danger animated fadeIn">El email es
+              obligatorio</span>
+            <div class="form-group row">
+              <label for="usuario" class="col-3">Usuario </label>
+              <div class="col-9">
+                <input type="email" [(ngModel)]="usuario.correo" class="form-control" placeholder="Email" name="email"
+                  required email>
+              </div>
+            </div>
+
+            <span *ngIf="f.submitted && f.controls['pass'].errors" class="text-danger animated fadeIn">la contraseña es
+              obligatorio</span>
+            <div class="form-group row">
+              <label for="password" class="col-3">Password </label>
+              <div class="col-9">
+                <input type="password" [(ngModel)]="usuario.password" class="form-control" placeholder="Password"
+                  name="pass" required minlength="2">
+              </div>
+            </div>
+            <div class="form-group text-left">
+              <button type="submit" class="btn btn-primary mr-1" name="login">Ingresar</button>
+              <a class="nav-link" class="btn btn-info " [routerLink]="['/registroUsuario']">Usuario nuevo</a>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
